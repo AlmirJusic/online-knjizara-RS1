@@ -1,0 +1,84 @@
+﻿@model online_knjizara.ViewModels.KorisnickiProfilPrikazVM
+
+
+@{
+    ViewData["Title"] = "Index";
+
+    @if(!Model.JelZaposlenik)
+     {
+         Layout = "_LayoutUser";
+     }
+
+}
+
+
+
+<h2>@Model.Ime @Model.Prezime</h2>
+
+<br />
+
+
+
+<form action="/KorisnickiProfil/Uredi" method="post">
+    <input type="hidden" value="@Model.Profil_ID" />
+
+    <h4>O osobi:</h4>
+
+    <div class="form-group">
+        <label>Ime:     @Model.Ime</label>
+
+
+    </div>
+
+    <div class="form-group">
+        <label>Prezime:     @Model.Prezime</label>
+
+
+    </div>
+
+    <div class="form-group">
+        <label>Datum rođenja:   @Model.DatumRodjenja.ToShortDateString()</label>
+
+    </div>
+
+
+    <div class="form-group">
+        <label>Grad:    @Model.Grad</label>
+
+
+    </div>
+
+    <div class="form-group">
+        <label>Adresa:    @Model.Adresa</label>
+
+
+    </div>
+
+    <h4>Pristupni podaci:</h4>
+
+    <div class="form-group">
+        <label>Korisničko ime:  @Model.KorisnickoIme</label>
+        
+
+
+    </div>
+
+
+    <h4>Kontakt podaci:</h4>
+
+    <div class="form-group">
+        <label>Telefon:   @Model.Telefon</label>
+
+    </div>
+    <div class="form-group">
+        <label>Email:   @Model.Email</label>
+
+
+    </div>
+    <br />
+
+    <input type="submit" value="Uredi" class="btn btn-info" />
+</form>
+
+
+

@@ -1,0 +1,64 @@
+﻿@model online_knjizara.ViewModels.LoginVM
+@{
+    ViewData["Title"] = "Login";
+    string error_poruka = (string)TempData["error_poruka"];
+    Layout = "_LayoutAnonim";
+
+}
+<html>
+    <head>
+        
+        <!-- meta tags -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <link href="~/css/Autentifikacija.css" rel="stylesheet" />
+        
+    
+    </head>
+    <body>
+        <h1>Online-knjizara Login </h1>
+        <div class="login-form">
+            <h2>Prijavite se ovdje</h2>
+            <form asp-action="Login" id="form">
+
+                <div class="form-group">
+                    <label>Korisničko ime: </label>
+                    <div>
+                        <input id="KorisnickoIme" name="KorisnickoIme" class="form-control" autocomplete="off" />
+                        <span asp-validation-for="KorisnickoIme" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Lozinka: </label>
+                    <div>
+                        <input id="Lozinka" name="Lozinka" class="form-control" type="password" autocomplete="off" />
+                        <span asp-validation-for="Lozinka" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <br />
+                
+                    <input  asp-for="ZapamtiLozinku" />   Zapamti lozinku
+                
+                <br /><br />
+
+                <input type="submit" class="form-control btn btn-primary" value="Login" />
+
+
+            </form>
+            
+            <p class="register-p">
+                Niste registrovani?<a asp-controller="Autentifikacija" asp-action="Registracija" class="register"> Registrujte se</a>
+
+            </p>
+        </div>
+        <footer>
+            <p class="copyright-agileinfo"> &copy; 2021 Online knjižara. All Rights Reserved.</p>
+        </footer>
+    
+    </body>
+
+</html>
+

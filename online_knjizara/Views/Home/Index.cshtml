@@ -1,0 +1,23 @@
+﻿@using online_knjizara.Helpers
+
+
+@{
+    ViewData["Title"] = "Home Page";
+
+    string error_poruka = (string)TempData["error_poruka"];
+
+    <p>Dobrodošli  <b>@Context.GetLogiraniKorisnik().KorisnickoIme</b> u administracijski dio online-knjizare!</p>
+
+}
+
+
+
+@if (error_poruka != null)
+{
+    <br />
+    <div class="alert alert-danger">
+        @error_poruka
+    </div>
+}
+
+

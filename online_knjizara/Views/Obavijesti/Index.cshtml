@@ -1,0 +1,76 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<Obavijesti>;
+@using online_knjizara.Helpers
+@using online_knjizara.EntityModels
+
+@{
+    ViewData["Title"] = "Prikazi";
+    
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="text-left">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-info btn-sm">Menu</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+@if (!Model.Data.Any())
+{
+    <div class="alert alert-info clearfix">
+        <span>Nema obavjesti za prikaz.</span>
+
+        <a asp-controller="Obavijesti" asp-action="Dodaj" class="btn btn-danger btn-xs float-right">Dodaj</a>
+    </div>
+}
+
+else
+{
+
+    @foreach (var i in Model.Data)
+    {
+
+        <div class="card" style="width:480px;margin:0 25%;padding:10px;">
+            @if (i.Slika == null)
+            {
+
+                <img src="@SlikaBase64.Prikaz(i.Slika)" style="border-radius:5px;box-shadow:5px 5px 5px; " height=250 width="477" />
+            }
+            else
+            {
+
+                <img alt="Nema slike" src="@SlikaBase64.Prikaz(i.Slika)" style="border-radius:5px;box-shadow:5px 5px 5px; " height=250>
+            }
+
+        <div class="card-body">
+            <h4 class="card-title"><b>@i.Naziv</b></h4>
+            <br />
+            <p>Datum objave: @i.Datum</p>
+            
+
+            <p class="card-text" style="width:477px;">@i.Sadrzaj</p>
+
+            <div style="width:477px;">
+                <a asp-action="Uredi" asp-route-ObavijestID="@i.ID" class="btn btn-primary ">Uredi</a>
+                <a asp-action="Obrisi" asp-route-ObavijestID="@i.ID" class="btn btn-danger">Obriši</a>
+            </div>
+        </div>
+        </div>
+    }
+
+}
+
+<cs-pager cs-paging-pagenumber=Model.PageNumber
+          cs-paging-totalitems=Model.TotalItems
+          cs-paging-pagesize=Model.PageSize
+          cs-pagenumber-param="trenutnaStr"
+          asp-controller="Obavijesti"
+          asp-action="Index"
+          cs-pager-li-current-class="page-item active"
+          cs-pager-li-other-class="page-item"
+          cs-pager-li-non-active-class="page-item disabled"
+          cs-pager-link-current-class="page-link"
+          cs-pager-link-other-class="page-link"></cs-pager>
+<a asp-action="Dodaj" class="btn btn-primary">Dodaj obavijest</a>

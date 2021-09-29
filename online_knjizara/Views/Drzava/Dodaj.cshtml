@@ -1,0 +1,45 @@
+﻿@model DrzavaUrediVM;
+
+
+@{
+    if (Model.ID == 0)
+    {
+        ViewData["Title"] = "Dodavanje države";
+    }
+    else
+    {
+        ViewData["Title"] = "Izmjena države";
+    }
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="text-left">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-info btn-sm">Menu</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<h3>@ViewData["Title"]</h3>
+
+<form asp-action="Snimi" method="post">
+    @Html.HiddenFor(s => s.ID)
+
+    <div class="form-group">
+        <label>Naziv države</label>
+        <input asp-for="Naziv" class="form-control" />
+        <span asp-validation-for="Naziv" class="text-danger"></span>
+        
+    </div>
+
+    
+     
+    
+
+
+    <input type="submit" value="Snimi" class="btn btn-primary" />
+</form>
+
+
+

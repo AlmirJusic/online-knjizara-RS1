@@ -1,0 +1,44 @@
+﻿@using online_knjizara.ViewModels
+@{
+    Layout = "_Layout";
+}
+
+@model RegistracijaSnimiVM
+
+<form asp-action="Snimi" asp-controller="Registracija">
+
+    <div>
+        <label>Ime</label>
+        <input asp-for="Ime" />
+    </div>
+
+    <div>
+        <label>Prezime</label>
+        <input asp-for="Prezime" />
+    </div>
+
+    <div>
+        <label>Adresa</label>
+        <input asp-for="Adresa" />
+    </div>
+
+    <div>
+        <label>Grad</label>
+        <select asp-for="GradID" asp-items="@Model.gradovi"></select>
+    </div>
+
+    <div>
+        <label>Email</label>
+        <input asp-for="Email" />
+    </div>
+
+    <div>
+        <label>Telefon</label>
+        <input asp-for="Telefon" />
+    </div>
+
+   
+
+    <input type="submit" value="Snimi" />
+
+</form>

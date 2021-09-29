@@ -1,0 +1,38 @@
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center">Prikaz žanrova</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <br>
+        <app-zanr-detail-form></app-zanr-detail-form>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group row">
+            <label for="search" class="col-sm-2 col-form-label" style="text-align: right;">Pretraga:</label>
+            <div class="col-sm-10">
+                <input type="text" [(ngModel)]="searchValue" class="form-control" id="searchfilter">
+            </div>
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>Naziv</th>
+                    <th>Opis</th>
+                    
+                    <th>Obrisi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pd of service.list|searchfilter:searchValue">
+                    <td (click)="populateForm(pd)">{{pd.naziv}}</td>
+                    <td (click)="populateForm(pd)">{{pd.opis}}</td>
+                    
+                    <td>
+                        <button class="btn btn-danger" (click)="onDelete(pd.id)">X</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

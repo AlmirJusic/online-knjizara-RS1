@@ -1,0 +1,71 @@
+﻿@model List<online_knjizara.ViewModels.CitaocKorisnikPrikazVM>
+
+
+@{
+    ViewData["Title"] = "Citaoc korisnik nalog zaposlenik pregled/brisanje";
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="text-left">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-info btn-sm">Menu</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<h3>@ViewData["Title"]</h3>
+
+<div>
+    <p>
+        @using (@Html.BeginForm("Index", "CitaocKorisnik", FormMethod.Get))
+        {
+            <b>Pretraga po: </b>@Html.RadioButton("option", "ImePrezime", true) <text> Ime i prezime</text>
+            @Html.RadioButton("option", "KorisnickoIme") <text> Korisnicko ime </text>
+            @Html.RadioButton("option", "Sve") <text> Prikazi sve </text><br />
+            @Html.TextBox("search") <input type="submit" value="Pretrazi" class="btn btn-info btn-sm" />
+        }
+    </p>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info clearfix">
+        <span>Nema CitaocKorisnikNalog za prikaz.</span>
+
+        
+    </div>
+}
+
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Ime i prezime</th>
+                <th>Korisnicko ime</th>
+                
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+
+                    <td>@item.ImeIPrezime</td>
+                    <td>@item.KorisnickoIme</td>
+                    
+                    
+                    <td class="text-right">
+                        
+                        <a asp-action="Obrisi" asp-route-id="@item.CitaocKorisnik_ID" class="btn btn-danger btn-sm">X</a>
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}

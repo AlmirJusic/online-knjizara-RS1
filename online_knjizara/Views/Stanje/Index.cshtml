@@ -1,0 +1,71 @@
+﻿@model List<StanjePrikazVM>;
+
+
+@{
+    ViewData["Title"] = "Stanja";
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="text-left">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-info btn-sm">Menu</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<h3>@ViewData["Title"]</h3>
+
+<div>
+    <p>
+        @using (@Html.BeginForm("Index", "Stanje", FormMethod.Get))
+        {
+            <b>Pretraga po: </b>@Html.RadioButton("option", "TipStanja", true) <text> Tip stanja </text>
+            @Html.RadioButton("option", "Sve") <text> Prikazi sve </text><br />
+            @Html.TextBox("search") <input type="submit" value="Pretrazi" class="btn btn-info btn-sm" />
+        }
+    </p>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info clearfix">
+        <span>Nema stanja za prikaz.</span>
+
+        <a asp-controller="Stanje" asp-action="Dodaj" class="btn btn-danger btn-xs float-right">Dodaj</a>
+    </div>
+}
+
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Tip stanja</th>
+                
+
+                <th class="text-right">
+                    <a asp-controller="Stanje" asp-action="Dodaj" class="btn btn-info btn-sm">Dodaj</a>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+            <tr>
+
+                <td>@item.TipStanja</td>
+                
+
+                <td class="text-right">
+                    <a asp-controller="Stanje" asp-action="Uredi" asp-route-id="@item.ID" class="btn btn-info btn-sm">Uredi</a>
+                    <a asp-action="Obrisi" asp-route-id="@item.ID" class="btn btn-danger btn-sm">X</a>
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+}

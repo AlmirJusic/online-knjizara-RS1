@@ -1,0 +1,73 @@
+﻿@model List<online_knjizara.ViewModels.ZaposlenikPrikazVM>
+
+
+@{
+    ViewData["Title"] = "Zaposlenici";
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="text-left">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-info btn-sm">Menu</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<h3>@ViewData["Title"]</h3>
+
+<div>
+    <p>
+        @using (@Html.BeginForm("Index", "Zaposlenici", FormMethod.Get))
+        {
+            <b>Pretraga po: </b>@Html.RadioButton("option", "ImePrezime", true) <text> Ime i prezime</text>
+            @Html.RadioButton("option", "StrucnaSprema") <text> Strucna sprema </text>
+            @Html.RadioButton("option", "KorisnickoIme") <text> Korisnicko Ime </text>
+            @Html.RadioButton("option", "Sve") <text> Prikazi sve </text><br />
+            @Html.TextBox("search") <input type="submit" value="Pretrazi" class="btn btn-info btn-sm" />
+        }
+    </p>
+</div>
+KorisnickoIme
+@if (!Model.Any())
+{
+    <div class="alert alert-info clearfix">
+        <span>Nema zaposlenika za prikaz.</span>
+
+        <a asp-controller="Zaposlenici" asp-action="Dodaj" class="btn btn-danger btn-xs float-right">Dodaj</a>
+    </div>
+}
+
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Ime i prezime</th>
+                <th>Strucna sprema</th>
+                <th>Korisnicko ime</th>
+                <th class="text-right">
+                    <a asp-controller="Zaposlenici" asp-action="Dodaj" class="btn btn-info btn-sm">Dodaj</a>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+
+                    <td>@item.ImeIPrezime</td>
+                    <td>@item.StrucnaSprema</td>
+                    <td>@item.KorisnickoIme</td>
+                    <td class="text-right">
+                        <a asp-controller="Zaposlenici" asp-action="Uredi" asp-route-id="@item.ID" class="btn btn-info btn-sm">Uredi</a>
+                        <a asp-action="Obrisi" asp-route-id="@item.ID" class="btn btn-danger btn-sm">X</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}

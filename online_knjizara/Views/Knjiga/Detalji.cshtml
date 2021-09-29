@@ -1,0 +1,81 @@
+﻿@using online_knjizara.ViewModels
+@{
+    Layout = "_Layout";
+}
+
+@model KnjigaDetaljiVM
+<div class="d-flex bd-highlight">
+    <div class="align-self-stretch">
+        <img src="/images/book.jpg" />
+    </div>
+    <div class="p-2 flex-fill bd-highlight">
+        <table class="table table-hover">
+            <tbody>
+                <tr><td>@Model.Naziv</td></tr>
+                <tr><td>@Model.Autor</td></tr>
+                <tr><td>@Model.Cijena KM</td></tr>
+                <tr><td>@Model.Zanr</td></tr>
+                <tr><td>@Model.Stanje</td></tr>
+                <tr><td>@Model.Izdavac</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="d-flex bd-highlight">
+    <button type="button" class="btn btn-primary p-2 flex-fill bd-highlight" onclick="">Odlomak</button>
+    <button type="button" class="btn btn-success p-2 flex-fill bd-highlight" onclick="Komentari(@Model.ID)">Komentari</button>
+    <button type="button" class="btn btn-danger p-2 flex-fill bd-highlight" onclick="">Naruči</button>
+</div>
+
+
+<div id="ajaxPrikaz">
+
+</div>
+
+<script>
+
+    function KomentarSnimi() {
+
+        var forma = $("#KomentarForma");
+        var url = '/Knjiga/KomentarSnimi';
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: forma.serialize(),
+            success: function (data) {
+                $("#ajaxPrikaz").html(data)
+            }
+        });
+    }
+    function DodajKomentar(KnjigaID) {
+        var url = '/Knjiga/KomentarDodaj?KnjigaID='+KnjigaID;
+
+        var zahtjev = new XMLHttpRequest();
+        zahtjev.onload = function () {
+            if (zahtjev.status === 200) {
+                document.getElementById("ajaxPrikaz").innerHTML = zahtjev.responseText;
+            } else {
+
+            }
+        };
+
+        zahtjev.open("GET", url, true);
+        zahtjev.send();
+    }
+    function Komentari(KnjigaID) {
+        var url = '/Knjiga/Komentari?KnjigaID=' + KnjigaID;
+
+        var zahtjev = new XMLHttpRequest();
+        zahtjev.onload = function () {
+            if (zahtjev.status === 200) {
+                document.getElementById("ajaxPrikaz").innerHTML = zahtjev.responseText;
+            } else {
+
+            }
+        };
+
+        zahtjev.open("GET", url, true);
+        zahtjev.send();
+    }
+</script>

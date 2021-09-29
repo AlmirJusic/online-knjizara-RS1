@@ -1,0 +1,65 @@
+﻿@using online_knjizara.ViewModels
+@{
+    Layout = "_Layout";
+}
+
+@model PocetnaKnjigeVM
+
+    <nav class="navbar navbar-light bg-light">
+        <form class="form">
+            <input class="form-control mr-sm-2" type="search" placeholder="Autor" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Traži</button>
+        </form>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row flex-xl-nowrap">
+            <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs">
+                <div>
+                    @foreach (PocetnaKnjigeVM.Zanr z in Model.zanrovi)
+                    {
+                        <a class="list-group-item list-group-item-action" href="/">@z.Naziv</a>
+                    }
+                </div>
+            </div>
+
+            <div class="row">
+
+                @foreach (PocetnaKnjigeVM.Knjiga k in Model.knjige)
+                {
+                    /*var base64 = Convert.ToBase64String(k.Slika);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);*/
+
+                    <div class="col-md-4">
+                        <div class="knjiga">
+                            <a href="/Knjiga/Detalji?KnjigaID=@k.ID"><img src="/images/book.jpg" /></a>
+                        </div>
+                        <div class="podaci">
+                            @k.Autor<br />
+                            @k.Naziv<br />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    
+
+<script>
+    function Komentari(KnjigaID) {
+        var url = '/Knjiga/Komentari?KnjigaID=' + KnjigaID;
+
+        var zahtjev = new XMLHttpRequest();
+        zahtjev.onload = function () {
+            if (zahtjev.status === 200) {
+                document.getElementById("ajaxPrikaz").innerHTML = zahtjev.responseText;
+            } else {
+
+            }
+        };
+
+        zahtjev.open("GET", url, true);
+        zahtjev.send();
+    }
+</script>

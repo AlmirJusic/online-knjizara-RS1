@@ -1,0 +1,23 @@
+﻿@using online_knjizara.ViewModels
+@{
+    Layout = null;
+}
+
+@model KnjigaKomentariVM
+<button class="btn btn-primary" onclick="DodajKomentar(@Model.KnjigaID)">Ostavi komentar</button>
+
+@foreach (KnjigaKomentariVM.Komentari k in Model.komentari)
+{
+    <div >
+        <label>Korisnik: </label>
+            <h5>@k.User</h5>
+        <label>Komentar: </label>
+            <h6>@k.Komentar</h6>
+        <label>Ocjena: </label>
+            <h6>@k.Ocjena</h6>
+    </div>
+}
+<script>
+
+</script>
+

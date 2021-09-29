@@ -1,0 +1,32 @@
+﻿@using online_knjizara.ViewModels
+@{
+    Layout = null;
+}
+
+@model KnjigaKomentarDodajVM
+
+<form id="KomentarForma">
+
+    <div class="mb-3">
+        <label class="form-label">User name</label>
+        <input type="text" class="form-control" asp-for="Username">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" asp-for="Password">
+    </div>
+    
+    <div>
+        <label>Komentar</label>
+        <input type="text" class="form-control" asp-for="Komentar" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ocjena</label>
+        <input type="number" class="form-control" asp-for="Ocjena" />
+    </div>
+    
+    <input type="button" class="btn btn-danger" value="Snimi" onclick="KomentarSnimi()"/>
+
+</form>

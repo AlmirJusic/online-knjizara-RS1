@@ -1,0 +1,64 @@
+﻿@model IzdavacUrediVM;
+
+
+@{
+    if (Model.ID == 0)
+    {
+        ViewData["Title"] = "Dodavanje izdavaca";
+    }
+    else
+    {
+        ViewData["Title"] = "Izmjena izdavaca";
+    }
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="text-left">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-info btn-sm">Menu</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<h3>@ViewData["Title"]</h3>
+
+<form asp-action="Snimi" method="post">
+    @Html.HiddenFor(s => s.ID)
+
+    <div class="form-group">
+        <label>Naziv</label>
+        <input asp-for="Naziv" class="form-control" />
+        <span asp-validation-for="Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Adresa</label>
+        <input asp-for="Adresa" class="form-control" />
+        <span asp-validation-for="Adresa" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Telefon</label>
+        <input asp-for="Telefon" class="form-control" />
+        <span asp-validation-for="Telefon" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label>Grad</label>
+        <select asp-for="Grad_ID" asp-items="Model.Grad" class="form-control">Odaberi</select>
+        <span asp-validation-for="Grad" class="text-danger"></span>
+    </div>
+
+
+
+    <input type="submit" value="Snimi" class="btn btn-primary" />
+</form>
+
+
